@@ -82,10 +82,15 @@ nav.top section input {
   height: 30px;
 }
 
-nav.top section a.button {
+nav.top section a {
+  color: #999999;
   padding: 0.5em;
   height: 40px;
   position: relative;
+}
+
+nav.top section a:hover {
+  color: #cccccc;
 }
 
 a {
@@ -98,7 +103,7 @@ a:hover {
 }
 
 a.button {
-  color: #ffffff;
+  color: white !important;
   padding-left: 1em;
   padding-bottom: 0.8em;
   padding-right: 1em;

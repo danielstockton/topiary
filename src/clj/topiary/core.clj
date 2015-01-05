@@ -13,22 +13,41 @@
 (def c1 (lighten black 20))
 (def c2 (lighten blue 10))
 
-(def base
+(def nav-top-height (px 45))
+
+(def grid-width (em 80))
+
+(def config {:colors {:white white
+                      :black black
+                      :red red
+                      :blue blue
+                      :green green
+                      :1 c1
+                      :2 c2}
+             :heights {:nav-top nav-top-height}
+             :grid {:columns 12
+                    :width grid-width}})
+
+(defn base
+  [config]
   "Base styles that are applied to all elements."
   [:* :*:before :*:after {:-moz-box-sizing "border-box"
                             :-webkit-box-sizing "border-box"
                             :box-sizing "border-box"}])
 
-(def screen-small
+(defn screen-small
+  [config]
   "Small screens."
   [:html {:font-size (px 14)}])
 
-(def screen-medium
+(defn screen-medium
+  [config]
   "Medium screens."
   (at-media {:min-width (em 40)}
     [:html {:font-size "100%"}]))
 
-(def screen-large
+(defn screen-large
+  [config]
   "Large screens."
   (at-media {:min-width (em 64)}
     [:html {:font-size "100%"}]
@@ -37,34 +56,36 @@
       :padding-left (em 1)
       :padding-right (em 1)}]))
 
-(def utility
+(defn utility
+  [config]
   "Utility classes."
   [[:.center {:text-align "center"}]])
 
-(def body
+(defn body
+  [config]
   "Body."
   [:body
    {:font-family "\"Helvetica Neue\", \"Helvetica\", Helvetica, Arial, sans-serif !important";
     :font-size (em 1)
-    :color c1
+    :color (get-in config [:colors :1])
     :padding 0
     :margin 0}])
 
-(def headings
+(defn headings
+  [config]
   "Headings."
   [[:h1 :h2 :h3 {:font-weight "normal"}]
    [:h1 {:font-size (em 2.4)}]
    [:h2 {:font-size (em 2)}]
    [:h3 {:font-size (em 1.4)}]])
 
-(def nav-top-height (px 45))
-
-(def nav-top
+(defn nav-top
+  [config]
   [:nav
    [:&.top {:position "relative"
             :background-color c1
-            :height nav-top-height
-            :line-height nav-top-height}
+            :height (get-in config [:heights :nav-top])
+            :line-height (get-in config [:heights :nav-top])}
     [:.brand {:padding-left (px 15)
               :padding-right (px 15)
               :color white}]
@@ -74,11 +95,14 @@
      [:input {:height (px 30)
               :padding-left (em 0.8)
               :padding-right (em 0.8)}]
-     [:a.button {:position "relative"
-                 :height (px 40)
-                 :padding (em 0.5)}]]]])
+     [:a {:position "relative"
+          :height (px 40)
+          :padding (em 0.5)
+          :color (lighten c1 40)}
+      [:&:hover {:color (lighten c1 60)}]]]]])
 
-(def lists
+(defn lists
+  [config]
   "Ordered and unordered lists."
   [[:ul.inline {:list-style "none"
                 :overflow "hidden"
@@ -98,7 +122,8 @@
           :padding-top (em 0.5)
           :padding-bottom (em 0.5)}]]]])
 
-(def buttons
+(defn buttons
+  [config]
   "Anchor links and buttons."
   [:a {:text-decoration 'none
        :color c2}
@@ -108,20 +133,18 @@
                :padding-right (em 1)
                :padding-bottom (em 0.8)
                :padding-left (em 1)
-               :color white}
+               :color "white !important"}
     [:&.danger {:background-color red}
      [:&:hover {:background-color (darken red 10)}]]
     [:&.success {:background-color green}
      [:&:hover {:background-color (darken green 10)}]]
     [:&:hover {:background-color (darken c2 10)}]]])
 
-(def columns 12)
-(def grid-width (em 80))
-
-(def grid
+(defn grid
+  [config]
   "Responsive grid."
   [[:.container {:margin "0 auto"
-                 :max-width grid-width
+                 :max-width (get-in config [:grid :width])
                  :width "90%"}]
    [:.row {:*zoom 1}
     [:&:after :&:before {:content "\" \"" :display "table"}]
@@ -129,12 +152,14 @@
    [:.col
     {:border 'none
      :width "100%"}
-    (for [i (map #(* % (/ 100 columns)) (range 1 columns))]
-      [(keyword (str "&.span-" (* columns (/ i 100)))) {:width (str (float i) "%")}])
+    (let [columns (get-in config [:grid :columns])]
+      (for [i (map #(* % (/ 100 columns)) (range 1 columns))]
+        [(keyword (str "&.span-" (* columns (/ i 100)))) {:width (str (float i) "%")}]))
     ;; To display first on mobile but appear right on larger screens.
     [:&.flow-opposite {:float "right"}]]])
 
-(def modal
+(defn modal
+  [config]
   "Modal."
   [[:.modal-backdrop {:position "fixed"
                       :top 0
@@ -157,18 +182,20 @@
                   :padding (em 2)}
     [:&.modal-close {:content "x"}]]])
 
-(def all [base
-          screen-small
-          screen-medium
-          screen-large
-          utility
-          body
-          headings
-          nav-top
-          buttons
-          lists
-          grid
-          modal])
+(defn all
+  [config]
+  [(base config)
+   (screen-small config)
+   (screen-medium config)
+   (screen-large config)
+   (utility config)
+   (body config)
+   (headings config)
+   (nav-top config)
+   (buttons config)
+   (lists config)
+   (grid config)
+   (modal config)])
 
-(defstyles topiary all)
+(defstyles topiary (all config))
 
