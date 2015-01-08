@@ -11,7 +11,8 @@
 (def green (hsl 100 100 40))
 
 (def c1 (lighten black 20))
-(def c2 (lighten blue 10))
+(def c2 (lighten black 60))
+(def c3 (lighten blue 10))
 
 (def nav-top-height (px 45))
 
@@ -23,7 +24,8 @@
                       :blue blue
                       :green green
                       :1 c1
-                      :2 c2}
+                      :2 c2
+                      :3 c3}
              :heights {:nav-top nav-top-height}
              :grid {:columns 12
                     :width grid-width}})
@@ -59,7 +61,13 @@
 (defn utility
   [config]
   "Utility classes."
-  [[:.center {:text-align "center"}]])
+  [[:.center {:text-align "center"}]
+   [:.large {:font-size (em 1.2)
+             :padding (em 1.2)}]
+   [:.small {:font-size (em 0.8)
+             :padding (em 0.8)}]
+   [:.tiny {:font-size (em 0.6)
+            :padding (em 0.6)}]])
 
 (defn body
   [config]
@@ -98,7 +106,8 @@
      [:a {:position "relative"
           :height (px 40)
           :padding (em 0.5)
-          :color (lighten c1 40)}
+          :color (lighten c1 40)
+          :display "inherit"}
       [:&:hover {:color (lighten c1 60)}]]]]])
 
 (defn lists
@@ -126,19 +135,30 @@
   [config]
   "Anchor links and buttons."
   [:a {:text-decoration 'none
-       :color c2}
-   [:&:hover {:color (darken c2 10)}]
-   [:&.button {:background-color c2
+       :color c3}
+   [:&:hover {:color (darken c3 10)}]
+   [:&.button {:background-color c3
                :padding-top (em 0.8)
                :padding-right (em 1)
                :padding-bottom (em 0.8)
                :padding-left (em 1)
-               :color "white !important"}
+               :color "white !important"
+               :display "inline-block"}
     [:&.danger {:background-color red}
      [:&:hover {:background-color (darken red 10)}]]
     [:&.success {:background-color green}
      [:&:hover {:background-color (darken green 10)}]]
-    [:&:hover {:background-color (darken c2 10)}]]])
+    [:&:hover {:background-color (darken c3 10)}]]])
+
+(defn forms
+  [config]
+  "Forms."
+  [[:input {:padding (em 0.6)
+            :border-width (px 1)
+            :border-style "solid"
+            :border-color (get-in config [:colors :2])
+            :box-shadow "inset 0 1px 2px rgba(0, 0, 0, 0.1)"
+            :display "block"}]])
 
 (defn grid
   [config]
@@ -194,6 +214,7 @@
    (nav-top config)
    (buttons config)
    (lists config)
+   (forms config)
    (grid config)
    (modal config)])
 
