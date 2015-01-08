@@ -92,6 +92,7 @@ nav.top section {
 }
 
 nav.top section input {
+  display: inherit;
   padding-right: 0.8em;
   padding-left: 0.8em;
   height: 30px;

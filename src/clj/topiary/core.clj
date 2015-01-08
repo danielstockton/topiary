@@ -33,9 +33,9 @@
 (defn base
   [config]
   "Base styles that are applied to all elements."
-  [:* :*:before :*:after {:-moz-box-sizing "border-box"
-                            :-webkit-box-sizing "border-box"
-                            :box-sizing "border-box"}])
+  [:* :*:before :*:after {:-moz-box-sizing :border-box
+                            :-webkit-box-sizing :border-box
+                            :box-sizing :border-box}])
 
 (defn screen-small
   [config]
@@ -54,14 +54,14 @@
   (at-media {:min-width (em 64)}
     [:html {:font-size "100%"}]
     [:.col
-     {:float "left"
+     {:float :left
       :padding-left (em 1)
       :padding-right (em 1)}]))
 
 (defn utility
   [config]
   "Utility classes."
-  [[:.center {:text-align "center"}]
+  [[:.center {:text-align :center}]
    [:.large {:font-size (em 1.2)
              :padding (em 1.2)}]
    [:.small {:font-size (em 0.8)
@@ -82,7 +82,7 @@
 (defn headings
   [config]
   "Headings."
-  [[:h1 :h2 :h3 {:font-weight "normal"}]
+  [[:h1 :h2 :h3 {:font-weight :normal}]
    [:h1 {:font-size (em 2.4)}]
    [:h2 {:font-size (em 2)}]
    [:h3 {:font-size (em 1.4)}]])
@@ -90,7 +90,7 @@
 (defn nav-top
   [config]
   [:nav
-   [:&.top {:position "relative"
+   [:&.top {:position :relative
             :background-color c1
             :height (get-in config [:heights :nav-top])
             :line-height (get-in config [:heights :nav-top])}
@@ -98,36 +98,37 @@
               :padding-right (px 15)
               :color white}]
     [:section
-     {:display "inline"
+     {:display :inline
       :font-size (em 0.8)}
      [:input {:height (px 30)
               :padding-left (em 0.8)
-              :padding-right (em 0.8)}]
-     [:a {:position "relative"
+              :padding-right (em 0.8)
+              :display :inherit}]
+     [:a {:position :relative
           :height (px 40)
           :padding (em 0.5)
           :color (lighten c1 40)
-          :display "inherit"}
+          :display :inherit}
       [:&:hover {:color (lighten c1 60)}]]]]])
 
 (defn lists
   [config]
   "Ordered and unordered lists."
-  [[:ul.inline {:list-style "none"
-                :overflow "hidden"
+  [[:ul.inline {:list-style :none
+                :overflow :hidden
                 :padding 0
                 :margin-left (em -1)}
-    [:li {:display "block"
-          :float "left"
+    [:li {:display :block
+          :float :left
           :margin-left (em 1)}]]
-   [:ul.stack {:list-style "none"
-               :overflow "hidden"
+   [:ul.stack {:list-style :none
+               :overflow :hidden
                :padding 0
                :margin-left (em -1)}
-    [:li {:display "block"
+    [:li {:display :block
           :margin-left (em 1)}
      [:&:hover {:background-color (lighten c1 78)}]
-     [:a {:display "block"
+     [:a {:display :block
           :padding-top (em 0.5)
           :padding-bottom (em 0.5)}]]]])
 
@@ -143,7 +144,7 @@
                :padding-bottom (em 0.8)
                :padding-left (em 1)
                :color "white !important"
-               :display "inline-block"}
+               :display :inline-block}
     [:&.danger {:background-color red}
      [:&:hover {:background-color (darken red 10)}]]
     [:&.success {:background-color green}
@@ -155,10 +156,10 @@
   "Forms."
   [[:input {:padding (em 0.6)
             :border-width (px 1)
-            :border-style "solid"
+            :border-style :solid
             :border-color (get-in config [:colors :2])
             :box-shadow "inset 0 1px 2px rgba(0, 0, 0, 0.1)"
-            :display "block"}]])
+            :display :block}]])
 
 (defn grid
   [config]
@@ -167,8 +168,8 @@
                  :max-width (get-in config [:grid :width])
                  :width "90%"}]
    [:.row {:*zoom 1}
-    [:&:after :&:before {:content "\" \"" :display "table"}]
-    [:&:after {:clear "both"}]]
+    [:&:after :&:before {:content "\" \"" :display :table}]
+    [:&:after {:clear :both}]]
    [:.col
     {:border 'none
      :width "100%"}
@@ -176,12 +177,12 @@
       (for [i (map #(* % (/ 100 columns)) (range 1 columns))]
         [(keyword (str "&.span-" (* columns (/ i 100)))) {:width (str (float i) "%")}]))
     ;; To display first on mobile but appear right on larger screens.
-    [:&.flow-opposite {:float "right"}]]])
+    [:&.flow-opposite {:float :right}]]])
 
 (defn modal
   [config]
   "Modal."
-  [[:.modal-backdrop {:position "fixed"
+  [[:.modal-backdrop {:position :fixed
                       :top 0
                       :left 0
                       :bottom 0
@@ -190,7 +191,7 @@
                       :background-color c1
                       :opacity "0.1"
                       :z-index 1000}]
-   [:.modal-body {:position "fixed"
+   [:.modal-body {:position :fixed
                   :top (px 88)
                   :background-color white
                   :z-index 1001
