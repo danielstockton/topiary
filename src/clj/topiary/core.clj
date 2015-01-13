@@ -135,8 +135,9 @@
 (defn buttons
   [config]
   "Anchor links and buttons."
-  [:a {:text-decoration 'none
-       :color c3}
+  [:a :button {:text-decoration 'none
+               :color c3
+               :border :none}
    [:&:hover {:color (darken c3 10)}]
    [:&.button {:background-color c3
                :padding-top (em 0.8)
