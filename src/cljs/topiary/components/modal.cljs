@@ -17,8 +17,8 @@
           (condp = (.-keyCode e)
                   27 (om/update! data :visible false)
                   (om/update! data :visible false)))))
-    om/IRenderState
-    (render-state [_ state]
+    om/IRender
+    (render [_]
       (dom/div
         nil
         (om/build (:open data) data)

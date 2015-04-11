@@ -204,6 +204,22 @@
                   :padding (em 2)}
     [:&.modal-close {:content "x"}]]])
 
+(defn tables
+  [config]
+  "Tables."
+  [[:table
+    [:&.table {:text-align :left
+               :border-spacing 0
+               :width "100%"}
+     [:th {:padding (em 0.5)}]
+     [:td {:padding (em 0.5)
+           :border-top-style :solid
+           :border-top-width (px 1)
+           :border-top-color c2}]]]
+   [:ul.pagination
+    [:a {:padding (em 0.5)}
+     [:&.active {:font-weight :bold}]]]])
+
 (defn all
   [config]
   [(base config)
@@ -218,7 +234,8 @@
    (lists config)
    (forms config)
    (grid config)
-   (modal config)])
+   (modal config)
+   (tables config)])
 
 (defstyles topiary (all config))
 

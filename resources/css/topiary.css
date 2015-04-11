@@ -294,3 +294,28 @@ input {
 .modal-body.modal-close {
   content: x;
 }
+
+table.table {
+  border-spacing: 0;
+  width: 100%;
+  text-align: left;
+}
+
+table.table th {
+  padding: 0.5em;
+}
+
+table.table td {
+  border-top-color: #999999;
+  border-top-width: 1px;
+  border-top-style: solid;
+  padding: 0.5em;
+}
+
+ul.pagination a {
+  padding: 0.5em;
+}
+
+ul.pagination a.active {
+  font-weight: bold;
+}
