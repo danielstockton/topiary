@@ -8,11 +8,11 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[garden "1.2.1"]
-                 [om "0.7.3"]
+                 [org.omcljs/om "0.8.8"]
                  [org.clojure/clojure "1.7.0-alpha1"]
-                 [org.clojure/clojurescript "0.0-2356"]]
+                 [org.clojure/clojurescript "0.0-3126"]]
 
-  :plugins [[lein-garden "0.2.1"]
+  :plugins [[lein-garden "0.2.5"]
             [lein-cljsbuild "1.0.3"]]
 
   :source-paths ["src/clj"]
