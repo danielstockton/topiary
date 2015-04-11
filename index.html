@@ -99,7 +99,7 @@
                                     :font-size (em 0.8)}]
                         [:div.buttons [:a {:margin-right (em 1)}]]]]]])
 
-;; Choose only that which you need.
+;; Choose only what you need.
 (defn all
   [config]
   [(topiary/base config)
@@ -114,7 +114,8 @@
    (topiary/lists config)
    (topiary/forms config)
    (topiary/grid config)
-   (topiary/modal config)])
+   (topiary/modal config)
+   (topiary/tables config])
 
 (def all (conj (all conf) styles))
 
