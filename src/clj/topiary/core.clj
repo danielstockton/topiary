@@ -212,7 +212,8 @@
                :border-spacing 0
                :width "100%"}
      [:th {:padding (em 0.5)}
-      [:&:after {:float :right}]
+      [:&:after {:float :right
+                 :color (lighten c2 20)}]
       [:&.desc:after {:content "'\u25BC'"}]
       [:&.asc:after {:content "'\u25B2'"}]]
      [:td {:padding (em 0.5)
