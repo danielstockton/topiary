@@ -211,7 +211,11 @@
     [:&.table {:text-align :left
                :border-spacing 0
                :width "100%"}
-     [:th {:padding (em 0.5)}
+     [:th {:padding (em 0.5)
+           :-moz-user-select :none
+           :-webkit-user-select :none
+           :-ms-user-select :none
+           :user-select :none}
       [:&:after {:float :right
                  :color (lighten c2 20)}]
       [:&.desc:after {:content "'\u25BC'"}]
