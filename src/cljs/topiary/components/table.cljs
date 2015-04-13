@@ -52,10 +52,11 @@
                   (fn [c i]
                     (dom/th
                       #js {:onClick (fn [e]
-                                      (om/update! data
-                                                  :sort-direction
-                                                  (change-direction (:sort-direction @data)))
-                                      (om/update! data :sort-column i))
+                                      (when-not (= (:sortable c) false)
+                                        (om/update! data
+                                                    :sort-direction
+                                                    (change-direction (:sort-direction @data)))
+                                        (om/update! data :sort-column i)))
                            :className (if (= i sort-column) (.substr (str sort-direction) 1) "")}
                       (:name c)))
                   columns (range))))
@@ -72,6 +73,7 @@
                     (dom/td
                       #js {}
                       (cond
+                        (fn? contents) (om/build contents data)
                         (and (number? contents) (= ctype :currency)) (cstr contents)
                         (number? contents) (nstr contents)
                         (string? contents) contents
