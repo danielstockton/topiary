@@ -55,8 +55,9 @@
                                       (om/update! data
                                                   :sort-direction
                                                   (change-direction (:sort-direction @data)))
-                                      (om/update! data :sort-column i))}
-                      (str (:name c) (if (= i sort-column) sort-direction))))
+                                      (om/update! data :sort-column i))
+                           :className (if (= i sort-column) (.substr (str sort-direction) 1) "")}
+                      (:name c)))
                   columns (range))))
             (apply
               dom/tbody

@@ -39,13 +39,12 @@
                        {:id "production"
                         :source-paths ["src/cljs"]
                         :compiler {
-                                   :output-to "topiary.js"
+                                   :output-to "resources/js/topiary-min.js"
                                    :optimizations :advanced
                                    :elide-asserts true
                                    :pretty-print false
                                    :output-wrapper false
                                    :preamble ["react/react.min.js"]
-                                   :externs ["react/externs/react.js"]
                                    :closure-warnings
                                    {:non-standard-jsdoc :off}}}
                        ]}

@@ -305,6 +305,18 @@ table.table th {
   padding: 0.5em;
 }
 
+table.table th:after {
+  float: right;
+}
+
+table.table th.desc:after {
+  content: '▼';
+}
+
+table.table th.asc:after {
+  content: '▲';
+}
+
 table.table td {
   border-top-color: #999999;
   border-top-width: 1px;
