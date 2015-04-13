@@ -302,6 +302,10 @@ table.table {
 }
 
 table.table th {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
   padding: 0.5em;
 }
 
