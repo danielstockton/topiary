@@ -73,7 +73,7 @@
                     (dom/td
                       #js {}
                       (cond
-                        (fn? contents) (om/build contents data)
+                        (fn? contents) (om/build contents column)
                         (and (number? contents) (= ctype :currency)) (cstr contents)
                         (number? contents) (nstr contents)
                         (string? contents) contents
